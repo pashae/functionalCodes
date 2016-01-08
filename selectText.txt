@@ -1,0 +1,14 @@
+﻿//跨浏览器选择文本
+function selectText(textbox, satartIndex, stopIndex) {
+	if (textbox.setSelectionRange) {
+		textbox.setSelectionRange(satartIndex, stopIndex);
+	} else if (textbox.createTextRange) {
+		//IE
+		var range = textbox.currentTextRange();
+		range.collapse();
+		range.moveStart("character", startIndex);
+		range.noveEnd("character", stopIndex - startIndex);
+		range.select();
+	}
+	textbox.focus();
+}

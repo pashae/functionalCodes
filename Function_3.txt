@@ -1,0 +1,43 @@
+﻿//以下是三种方法，采集自慕课网。
+//第一个方法: isElement
+
+var testDiv = document.createElement('div');
+var isElement = function(obj) {
+	if(obj && obj.nodeType === 1) {
+		if(window.Node && (obj instanceof Node)) {
+			return true;
+		}
+		try {
+			testDiv.appendChild(obj);
+			testDiv.removeChild(obj);
+		}catch (e) {
+			return false;
+		}
+		return true;
+	}
+	return false;
+}
+
+-------------------------------------------------
+
+//下面这个方法是用来判断是否是xml还是HTML
+//这里的思想是：HTML是XML的一个子集。
+var isXML = function(doc) {
+	return doc.createElement("p").nodeName !== doc.createElement("P").nodeName;
+}
+
+--------------------------------------------------
+
+//如何判断两个节点之间的关系，最新的浏览器都装备了contains方法
+//a为上层节点b为下层节点
+function fixContains(a,b) {
+	try {
+		while((b = b.parentNode)) {
+			if(b === a){
+				return true;
+			}
+		}
+	}catch(e) {
+		return false;
+	}
+}
