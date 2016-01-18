@@ -1,0 +1,20 @@
+canvas工具函数(js)：绘图工具		
+/*
+定义一个以（x,y）为中心，半径为r的规则n变形
+每个顶点都是均匀分布在圆周上
+将第一个顶点放置在最上面，或者指定一定角度
+除非最后一个参数是true，否则顺时针旋转
+*/
+		
+function polygon(c,n,x,y,r,angle,counterclockwise) {
+	angle = angle || 0;
+	counterclockwise = counterclockwise || false;
+	c.moveTo(x + r*Math.sin(angle), y - r*Math.cos(angle));		//使用三角法计算位置
+	var delta = 2*Math.PI / n;					//两个顶点之间的夹角
+	for (var i=0; i<n ; i++) {
+		angle += counterclockwise? -delta : delta;		//调整角度
+		//以下个顶点为端点添加线段
+		c.lineTo(x + r*Math.sin(angle), y - r*Math.cos(angle));	
+	};
+	c.closePath();				//将最后一个顶点和起点连接起来
+}

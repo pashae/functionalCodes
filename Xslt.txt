@@ -1,0 +1,28 @@
+/*在计算机科学中，XSLT是 扩展样式表转换语言 的外语缩写，这是一种对XML（标准通用标记语言的子集）文档进行转化的语言，XSLT中的T代表英语中的“转换”（Transformation）。
+XSLT是一种用于将XML文档转换任意文本的描述语言。
+XPath是一种用于在XML文档中进行导航的语言。
+XSLT指XSL转换（XSLTransformations）。
+XSLT是XSL中最重要的部分。
+XSLT可将一种XML文档转换为另外一种文本文件形式。
+XSLT使用XPath在XML文档中进行导航。
+XPath是一个W3C标准。
+XSLT=XSL转换。
+XSLT用于将一种XML文档转换为另外一种XML文档，或者可被浏览器识别的其他类型的文档，比如HTML和XHTML。通常，XSLT是通过把每个XML元素转换为(X)HTML元素来完成这项工作的。通过XSLT，您可以向或者从输出文件添加或移除元素和属性。您也可重新排列元素，执行测试并决定隐藏或显示哪个元素。描述转化过程的一种通常的说法是，XSLT把XML源树转换为XML结果树。
+XSLT使用XPath：XSLT使用XPath在XML文档中查找信息。XPath被用来通过元素和属性在XML文档中进行导航。在转换过程中，XSLT使用XPath来定义源文档中可匹配一个或多个预定义模板的部分。一旦匹配被找到，XSLT就会把源文档的匹配部分转换为结果文档。*/
+
+跨浏览器兼容性最好的XSLT技术，只能是返回结果的字符串。
+
+不能绝对依赖在Javascript中使用XSLT进行转换的结果。
+
+function transform(context, xslt) {
+	if (typeof XSLTProcessor != "undefined") {
+		var processor = new XSLTProcessor();
+		processor.importStylesheet(xslt);
+		var result = processor.transformToDocument(context);
+		return (new XMLSerializer()).serializeToString(result);
+	} else if (typeof context.transformNode != "undefied") {
+		return context.transformNode(xslt);
+	} else {
+		throw new Error("No XSLT processor available.")
+	}
+}
