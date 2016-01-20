@@ -1,11 +1,13 @@
-/*XPath即为XML路径语言，它是一种用来确定XML（标准通用标记语言的子集）文档中某部分位置的语言。XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。
+/*
+XPath即为XML路径语言，它是一种用来确定XML（标准通用标记语言的子集）文档中某部分位置的语言。XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。
 XPath 使用路径表达式在 XML文档中进行导航
 XPath 包含一个标准函数库
 XPath 是 XSLT 中的主要元素
 XPath 是一个 W3C 标准
 
 跨浏览器的XPath实现。（鉴于IE对XPath功能的支持有限，这个函数只能保证达到IE支持的功能）
-函数接收三个参数：上下文节点、XPath表达式和可选的命名空间对象。*/
+函数接收三个参数：上下文节点、XPath表达式和可选的命名空间对象。
+*/
 
 function selectSingleNode(context, expression, namespaces) {
 	var doc = (context.nodeType != 9 context.ownerDocument : context);
